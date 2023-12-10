@@ -1,10 +1,10 @@
 import {ComputationWorkerImpl} from "./computation-worker/computation-worker-impl";
 import {ComputationWorker} from "./computation-worker/computation-worker";
-import {createObjects} from "./utils/object-util";
+import {createWorkers} from "./utils/object-util";
 
 // Example usage
 const main = async () : Promise<void> => {
-    const workerArray: ComputationWorkerImpl[] = createObjects(4, ComputationWorkerImpl);
+    const workerArray: ComputationWorker[] = createWorkers(4, ComputationWorkerImpl);
 
     try {
         const values : any[] = await Promise.all(
