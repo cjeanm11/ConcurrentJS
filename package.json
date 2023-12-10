@@ -3,7 +3,7 @@
     "lockfileVersion": 3,
     "requires": true,
     "scripts": {
-        "build": "tsc src/main.ts src/worker.ts --outDir dist",
+        "build": "tsc src/*.ts --outDir dist",
         "start": "npm run build && node ./dist/main.js"
     },
     "packages": {},
