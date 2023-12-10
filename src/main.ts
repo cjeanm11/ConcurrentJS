@@ -1,6 +1,6 @@
-import {ComputationWorkerImpl} from "./computationWorker/computation-worker-impl";
-import {ComputationWorker} from "./computationWorker/computation-worker";
-import {createObjects} from "../utils/object-utils";
+import {ComputationWorkerImpl} from "./computation-worker/computation-worker-impl";
+import {ComputationWorker} from "./computation-worker/computation-worker";
+import {createObjects} from "../utils/object-util";
 
 // Example usage
 const main = async () : Promise<void> => {
