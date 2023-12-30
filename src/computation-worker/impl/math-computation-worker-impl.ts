@@ -1,11 +1,11 @@
 import {Worker} from "worker_threads";
-import {ComputationWorker} from "./computation-worker";
+import {ComputationWorker} from "../computation-worker";
 import * as path from "path";
 
-export class ComputationWorkerImpl implements ComputationWorker {
+export class MathComputationWorkerImpl implements ComputationWorker {
     private worker: Worker;
 
-    constructor(private workerScriptPath : string = path.resolve(__dirname, '../worker.js') ) {
+    constructor(private workerScriptPath : string = path.resolve(__dirname, '../../worker.js') ) {
         this.worker = new Worker(workerScriptPath, { workerData: {} });
 
         this.worker.on('success', (result) => {
@@ -27,7 +27,6 @@ export class ComputationWorkerImpl implements ComputationWorker {
 
     public execute(funcName: string, args: any[]): Promise<any> {
 
-        // Your existing logic to communicate with the worker and resolve/reject
         return new Promise((resolve, reject) => {
             const handleMessage = (message: any) => {
                 if (message.result !== undefined) {
@@ -58,3 +57,8 @@ export class ComputationWorkerImpl implements ComputationWorker {
     }
 }
 
+export function createMathComputationalWorkers(numOfWorkers: number): ComputationWorker[] {
+    return Array.from({ length: numOfWorkers }, (_, index) => {
+        return new MathComputationWorkerImpl();
+    });
+}
