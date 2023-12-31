@@ -1,11 +1,11 @@
 import {Worker} from "worker_threads";
-import {ComputationWorker} from "../computation-worker";
+import {ComputationWorker} from "./computation-worker";
 import * as path from "path";
 
-export class MathComputationWorkerImpl implements ComputationWorker {
+export class CalculationWorker implements ComputationWorker {
     private worker: Worker;
 
-    constructor(private workerScriptPath : string = path.resolve(__dirname, '../../worker.js') ) {
+    constructor(private workerScriptPath : string = path.resolve(__dirname, '../worker.js') ) {
         this.worker = new Worker(workerScriptPath, { workerData: {} });
 
         this.worker.on('success', (result) => {
@@ -59,6 +59,6 @@ export class MathComputationWorkerImpl implements ComputationWorker {
 
 export function createMathComputationalWorkers(numOfWorkers: number): ComputationWorker[] {
     return Array.from({ length: numOfWorkers }, (_, index) => {
-        return new MathComputationWorkerImpl();
+        return new CalculationWorker();
     });
 }
