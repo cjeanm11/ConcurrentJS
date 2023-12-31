@@ -13,6 +13,7 @@ export const httpTasks = {
     [apiUrl]: async (): Promise<Post> => {
         try {
             const response: AxiosResponse<Post> = await axios.get(apiUrl);
+            console.log("Http Response:", response);
             return response.data;
         } catch (error) {
             console.error("Task Error:", error);
@@ -21,11 +22,3 @@ export const httpTasks = {
     }
 };
 
-(async () => {
-    try {
-        const result = await httpTasks[apiUrl]();
-        console.log("Task Result:", result);
-    } catch (error) {
-        console.error("Task Error:", error);
-    }
-})();

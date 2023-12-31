@@ -1,8 +1,8 @@
-import { parentPort } from 'worker_threads';
-import { tasksStore } from './tasks-store/tasks-store';
+import {parentPort} from 'worker_threads';
+import {tasksStore} from './tasks-store/tasks-store';
 
 if (parentPort) {
-    parentPort.on('message', async ({ funcName, args }: { funcName: string; args: any[] }) => {
+    parentPort.on('message', async ({ funcName, args }) => {
         console.log(`Worker received message to execute function '${funcName}' with args:`, args);
         try {
             const result = await tasksStore[funcName](...args);
@@ -12,6 +12,4 @@ if (parentPort) {
             parentPort.postMessage({ error: error.message });
         }
     });
-} else {
-    throw new Error('No parent port available. This code should run in a worker thread.');
 }
